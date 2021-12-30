@@ -37,27 +37,26 @@ public class AutoDao extends AutoController<Auto> {
         return guardar(auto);
     }
 
-    public Lista<Auto> buscarPorModelo(String dato, Lista a) {
+    public Lista<Auto> buscarPorModelo(String dato, Lista auto) {
         System.out.println(dato);
-        Lista<Auto> auto = new Lista();
-        //Lista<Auto> aux = listar();
+        Lista<Auto> a = new Lista();
         int central, izquierda, derecha;
         izquierda = 0;
         derecha = auto.tamanio() - 1;
         while (izquierda <= derecha) {
             central = (izquierda + derecha) / 2;
-            Auto valorcentral = auto.consultarDatoPosicion(central);
+            Auto valorcentral = (Auto) auto.consultarDatoPosicion(central);
             if (valorcentral.getModelo().toLowerCase().contains(dato.toLowerCase())) {
-                auto.insertarNodo(valorcentral);
-                return auto;
+                a.insertarNodo(valorcentral);
+                return a;
             }
-            if (valorcentral.toString().compareTo(dato) > 0) {
+            if (valorcentral.getModelo().compareTo(dato) > 0) {
                 derecha = central - 1;
             } else {
                 izquierda = central + 1;
             }
 
         }
-        return auto;
+        return a;
     }
 }

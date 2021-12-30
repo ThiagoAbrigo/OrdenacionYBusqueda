@@ -219,16 +219,11 @@ public class Lista<T> implements Serializable {
                     for (i = salto; i < tamanio(); i++) {
                         Object datoT = value(consultarDatoPosicion(i - salto), atributo);
                         Object datoJ = value(consultarDatoPosicion(i), atributo);
-                        if (datoT instanceof Number) {
-                            //Numeros
-
-                        } else {
                             if (datoT.toString().compareTo(datoJ.toString()) > 0) {
                                 aux = consultarDatoPosicion(i);
                                 modificarPorPos(consultarDatoPosicion(i - salto), i);
                                 modificarPorPos(aux, i - salto);
                                 cambio = true;
-                            }
                         }
                     }
                 }

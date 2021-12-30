@@ -76,9 +76,13 @@ public class Frm_Auto extends javax.swing.JDialog {
         tableauto.updateUI();
     }
     private void buscar(){
-        String atributo = "modelo";
-        Lista aux = autoDao.listar();
-        aux = autoDao.buscarPorModelo(txtbusqueda.getText(), aux.Ordenar_Shell(atributo, aux));
+        int select = cbxbusqueda.getSelectedIndex();
+        Lista aux = new Lista();
+        switch(select){
+            case 0: aux = autoDao.listar();break;
+            case 1: aux = autoDao.buscarPorModelo(txtbusqueda.getText(), modelo.getLista());break;
+            default: aux = modelo.getLista();
+        }
         modelo.setLista(aux);
         tableauto.setModel(modelo);
         tableauto.updateUI();
@@ -112,6 +116,7 @@ public class Frm_Auto extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        cbxbusqueda = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -196,7 +201,7 @@ public class Frm_Auto extends javax.swing.JDialog {
         jPanel4.add(cbxordenacion);
         cbxordenacion.setBounds(50, 130, 100, 26);
         jPanel4.add(txtbusqueda);
-        txtbusqueda.setBounds(10, 40, 100, 30);
+        txtbusqueda.setBounds(10, 70, 100, 30);
 
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -205,7 +210,7 @@ public class Frm_Auto extends javax.swing.JDialog {
             }
         });
         jPanel4.add(jButton1);
-        jButton1.setBounds(120, 40, 70, 24);
+        jButton1.setBounds(120, 70, 70, 24);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setText("Busqueda Binara");
@@ -216,6 +221,10 @@ public class Frm_Auto extends javax.swing.JDialog {
         jLabel6.setText("Metodos Ordenacion");
         jPanel4.add(jLabel6);
         jLabel6.setBounds(30, 100, 150, 20);
+
+        cbxbusqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Modelo" }));
+        jPanel4.add(cbxbusqueda);
+        cbxbusqueda.setBounds(10, 30, 110, 26);
 
         jPanel1.add(jPanel4);
         jPanel4.setBounds(10, 170, 530, 170);
@@ -288,6 +297,7 @@ public class Frm_Auto extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNGUARDAR;
     private javax.swing.JButton BTNSALIR;
+    private javax.swing.JComboBox<String> cbxbusqueda;
     private javax.swing.JComboBox<String> cbxordenacion;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
